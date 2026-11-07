@@ -27,7 +27,19 @@ Obsidian 桌面端/手机端
 
 > **关于本文档**：仓库里的域名、IP、账号名已替换为 `YOUR_DOMAIN` / `YOUR_SERVER_IP` / `alice` 等占位符。部署时按实际情况替换即可；文档里的原理、参数、报错原文都是实测结果，未做删改。
 
-## 服务器部署（约 10 分钟）
+## 一键部署
+
+一台已解析好域名的全新 VPS 上，一条命令装完 Docker、CouchDB、nginx、证书：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/BandXx/obsidian-sync-service/main/deploy/install.sh \
+  | bash -s -- --domain notes.example.com --email you@example.com
+```
+
+结束时会打印服务地址、账号名和口令文件位置，并自动跑匿名 401 / 鉴权 200 的验收。
+加 `--dry-run` 可以只看它会做什么，不落地。
+
+## 服务器部署（约 10 分钟，手动版）
 
 前置：一台 1C1G 以上的 Linux，域名已解析到它，已装 Docker + Compose 插件。
 
@@ -91,6 +103,7 @@ curl -u ADMIN -X PUT https://HOST/couch/_users/org.couchdb.user:guest \
 | [docs/03-同事接入.md](docs/03-同事接入.md) | 新成员从零到同步成功的最短路径 |
 | [docs/04-架构图.md](docs/04-架构图.md) | 数据流与组件关系 |
 | [docs/05-运维与排错.md](docs/05-运维与排错.md) | **六个真实踩过的坑**，含报错原文与判定顺序 |
+| [AGENTS.md](AGENTS.md) | 给 AI 代理/接手者的操作约束：六条不可违反的规则 |
 
 ## 已知边界
 
