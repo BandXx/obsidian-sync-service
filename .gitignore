@@ -1,0 +1,10 @@
+# 真实口令永远不入库
+.env
+*.env
+!.env.example
+data.json
+backup-*.json
+
+# 客户端产物
+.obsidian/plugins/*/data.json
+.DS_Store

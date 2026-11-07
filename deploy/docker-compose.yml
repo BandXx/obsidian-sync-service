@@ -1,0 +1,17 @@
+# CouchDB for Self-hosted LiveSync
+# 只监听 127.0.0.1，外部流量一律经 nginx 反代。
+services:
+  couchdb:
+    image: couchdb:3.4
+    container_name: couchdb-livesync
+    user: 5984:5984
+    restart: unless-stopped
+    environment:
+      - COUCHDB_USER=${COUCH_USER}
+      - COUCHDB_PASSWORD=${COUCH_PASS}
+    volumes:
+      - /opt/couchdb/data:/opt/couchdb/data
+      - /opt/couchdb/etc:/opt/couchdb/etc/local.d
+    ports:
+      - 127.0.0.1:5984:5984
+    mem_limit: 512m
